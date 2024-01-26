@@ -6,12 +6,12 @@ import { Navbar } from './components/nav'
 import { PreloadResources } from '@/app/preload'
 import './globals.css'
 
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'NEETCLONE App',
-  description: 'Leetcode clone of Neetcode',
+  title: 'NEETCLONE!',
+  description: 'Leetcode clone of Neetcode, webapp',
+
 }
 
 // const cx = (...classes) => classes.filter(Boolean).join(' ');
