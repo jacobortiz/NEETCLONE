@@ -5,25 +5,24 @@ import { Navbar } from '@/app/components/nav';
 import { AuthModal } from '@/app/components/modals/auth';
 import { useRecoilValue } from 'recoil';
 import { auth_modal_state } from '../atoms/auth_atom';
-
-// import { Navbar } from "../components/nav";
-
-// interface PageProps {
-//     // Add any props you need for your page here
-// }
-
-// const Page: React.FC<PageProps> = () => {
-//     return (
-//         <div>
-//             testing login
-//         </div>
-//     );
-// };
-
-// export default Page;
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '@/app/firebase/firebase';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function Page() {
     const auth_modal = useRecoilValue(auth_modal_state)
+    const [user, loading, error] = useAuthState(auth)
+    const [pageLoading, setPageloading] = useState(true);
+    const router = useRouter()
+
+    useEffect(() => {
+        if(user) router.push('/')
+        if(!loading && !user) setPageloading(false);
+    }, [user, router, loading])
+
+    if(pageLoading) return null;
+
     return (
         <div className="bg-gradient-to-b from-gray-600 to-black h-screen relative">
             <div className="max-w-7xl- mx-auto">
