@@ -38,7 +38,7 @@ export const problems: Problem[] = [
 		difficulty: "Easy",
 		category: "Stack",
 		order: 4,
-		video_id: "xty7fr-k0TU",
+		video_id: "WTzjTskDFMg",
 	},
 	{
 		id: "search-a-2d-matrix",
