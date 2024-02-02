@@ -65,7 +65,7 @@ export function Login() {
                 { loading ? 'Loading' : 'Login' }
             </button>
             <button className="felx w-full justify-end" onClick={() => handleClick('forgotPassword')}>
-                <Link href={'/'} className="text-sm block text-brand-orange hover:underline w-full text-right">
+                <Link href={'#'} className="text-sm block text-brand-orange hover:underline w-full text-right">
                     Forgot Password?
                 </Link>
             </button>
