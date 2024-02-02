@@ -9,6 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/firebase/firebase';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 export default function Page() {
     const auth_modal = useRecoilValue(auth_modal_state)
