@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth"
 import { useSetRecoilState } from "recoil"
+import { toast } from "react-toastify"
 
 export function Login() {
     const set_auth_modal_state = useSetRecoilState(auth_modal_state)
@@ -29,12 +30,12 @@ export function Login() {
             router.push('/')
 
         } catch (error: any) {
-            alert(error.message)
+            toast.error(error.message, { position: 'top-center', autoClose: 3000, theme: 'dark' })
         }
     }
 
     useEffect(() => {
-        if(error) alert(error.message)
+        if(error) toast.error(error.message, { position: 'top-center', autoClose: 3000, theme: 'dark' })
     }, [error])
 
     return (

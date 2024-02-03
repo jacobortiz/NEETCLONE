@@ -33,8 +33,8 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <main>
-            {/* possible to move somewhere else */}
             <ToastContainer />
+            {/* possible to move somewhere else */}
             {children}
             {/* <Analytics /> */}
             {/* <SpeedInsights /> */}
