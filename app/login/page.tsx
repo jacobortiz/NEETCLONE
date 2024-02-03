@@ -1,7 +1,7 @@
 // import React from 'react';
 'use client'
 
-import { Navbar } from '@/app/components/nav';
+import { Navbar } from '@/app/components/navbar';
 import { AuthModal } from '@/app/components/modals/auth';
 import { useRecoilValue } from 'recoil';
 import { auth_modal_state } from '../atoms/auth_atom';
@@ -10,6 +10,7 @@ import { auth } from '@/app/firebase/firebase';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
+import Image from 'next/image';
 
 export default function Page() {
     const auth_modal = useRecoilValue(auth_modal_state)
@@ -29,7 +30,7 @@ export default function Page() {
             <div className="max-w-7xl- mx-auto">
                 <Navbar />
                 <div className="flex items-center justify-center h-[calc(100vh-5rem)] pointer-events-none select-none">
-                    <img src='/hero.png' alt='Hero'/>
+                    <Image src={'/hero.png'} alt='Hero' height={700} width={700}/>
                 </div>
                 {auth_modal.isOpen && <AuthModal />}
             </div>
