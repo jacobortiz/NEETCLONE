@@ -6,13 +6,19 @@ import { javascript } from "@codemirror/lang-javascript";
 import { EditorFootor } from "@/app/components/workspace/editor_footer";
 
 export function Playground() {
+    const boiler_plate = `function twoSum(nums, target) {
+    // Write your code here
+}`
+
     return (
-        <div className="flex flex-col bg-dark-layer-1 relative">
+        <div className="flex flex-col bg-dark-layer-1 relative overflow-x-hidden">
             <PreferenceNav />
             <Split className="h-[calc(100vh-94px)]" direction="vertical" sizes={[60,40]} minSize={60}>
                 <div className="w-full overflow-auto">
+
+                    {/* TODO: add more language support */}
                     <ReactCodeMirror 
-                        value="const a = 1"
+                        value={boiler_plate}
                         theme={vscodeDark}
                         extensions={[javascript()]}
                         style={{ fontSize: 16}}
