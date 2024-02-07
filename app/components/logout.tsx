@@ -1,6 +1,7 @@
 import { FiLogOut } from "react-icons/fi"
 import { useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from "@/app/firebase/firebase";
+
 export function Logout() {
     const [signOut, loading, error] = useSignOut(auth);
     const handleLogout = () => {
