@@ -17,7 +17,7 @@ export function EditorFootor() {
                         Run
                     </button>
                     <button className='px-3 py-1.5 font-medium items-center transition-all focus:outline-none inline-flex text-sm text-white bg-dark-green-s hover:bg-green-3 rounded-lg'>
-                        Submit
+                        Submit 
                     </button>
                 </div>
             </div>

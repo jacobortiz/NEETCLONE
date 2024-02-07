@@ -1,5 +1,3 @@
-// 'use client'
-
 import Split from "react-split";
 import { PreferenceNav } from '@/app/components/workspace/preference_nav'
 import ReactCodeMirror from "@uiw/react-codemirror";
