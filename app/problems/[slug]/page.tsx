@@ -10,3 +10,6 @@ export default function Problems({ params }: { params: { slug: string }}) {
         </div>
     )
 }
+
+// fetch local data
+// SSG
