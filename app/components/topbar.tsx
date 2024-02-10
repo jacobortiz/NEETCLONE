@@ -54,8 +54,8 @@ export function Topbar({ problemPage }: { problemPage: boolean }) {
                         </Link>
                     )}
 
-                    {problemPage && <Timer />}
-
+                    {user && problemPage && <Timer />}
+ 
                     {user && (
                         <div className='cursor-pointer group relative'>
                             <img src='/avatar.png' alt='user progile image' className="h-8 w-8 rounded-full" />
