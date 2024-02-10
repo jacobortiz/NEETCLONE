@@ -6,9 +6,11 @@ import Link from 'next/link'
 import { AiFillYoutube } from 'react-icons/ai'
 import { IoClose } from 'react-icons/io5'
 import YouTube from 'react-youtube'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-export function ProblemsTable() {
+export function ProblemsTable({ setLoadingProblems } : { setLoadingProblems : React.Dispatch<React.SetStateAction<boolean>>}) {
+
+    
 
     const [youtube_player, setYoutubePlayer] = useState({
         isOpen: false,
