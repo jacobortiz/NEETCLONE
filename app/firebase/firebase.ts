@@ -2,14 +2,13 @@ import { getApp, getApps, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// fix
 const firebaseConfig = {
-  apiKey: "AIzaSyBBlOh32ZuBPylFpqUfnmAbHFuZMgJYFFc",
-  authDomain: "neetclone-3376a.firebaseapp.com",
-  projectId: "neetclone-3376a",
-  storageBucket: "neetclone-3376a.appspot.com",
-  messagingSenderId: "332215291561",
-  appId: "1:332215291561:web:6213a98fa96324daf223b8"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
 const app = !getApps.length ? initializeApp(firebaseConfig) : getApp();

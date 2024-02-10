@@ -33,6 +33,7 @@ export function SignUp() {
             const new_user = await createUserWithEmailAndPassword(inputs.email, inputs.password)
             if(!new_user) return;
             // change
+            
             router.push('/')
         } catch(error: any) {
             alert(error.message)
