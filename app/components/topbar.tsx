@@ -1,10 +1,11 @@
 'use client'
+
 import Link from "next/link"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { auth } from '@/app/firebase/firebase'
-import { Logout } from "./logout"
+import { Logout } from "@/app/components/logout"
 import { useSetRecoilState } from "recoil"
-import { auth_modal_state } from "../atoms/auth_atom"
+import { auth_modal_state } from "@/app/atoms/auth_atom"
 import Image from "next/image"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"
 import { BsList } from "react-icons/bs"
