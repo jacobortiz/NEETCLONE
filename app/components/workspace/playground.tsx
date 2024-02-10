@@ -36,7 +36,7 @@ export function Playground({ problem }: { problem : Problem }) {
                     </div>
 
                     <div className="flex">
-                        {problem.examples.map((example, index) => (
+                        {problem?.examples.map((example, index) => (
                             <div className="mr-2 items-start mt-2 text-white" key={example.id}
                                 onClick={() => setActiveTestCaseID(index)}>
                                 <div className="flex flex-wrap items-center gap-y-4">
@@ -53,12 +53,12 @@ export function Playground({ problem }: { problem : Problem }) {
                     <div className="font-semibold my-4">
                         <p className="text-sm font-medium mt-4 text-white">Input: </p>
                         <div className="w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2">
-                            {problem.examples[activeTestCaseID].inputText}
+                            {problem?.examples[activeTestCaseID].inputText}
                         </div>
 
                         <p className="text-sm font-medium mt-4 text-white">Output: </p>
                         <div className="w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2">
-                            {problem.examples[activeTestCaseID].outputText}
+                            {problem?.examples[activeTestCaseID].outputText}
                         </div>
                     </div>
                 </div>
