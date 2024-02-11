@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { motion, LayoutGroup } from 'framer-motion';
-import { usePathname } from 'next/navigation';
-import { Suspense } from 'react';
-import Link from 'next/link';
-import { useSetRecoilState } from 'recoil';
-import { auth_modal_state } from '../atoms/auth_atom';
-import Image from 'next/image';
+import { motion, LayoutGroup } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { Suspense } from "react";
+import Link from "next/link";
+import { useSetRecoilState } from "recoil";
+import { auth_modal_state } from "../atoms/auth_atom";
+import Image from "next/image";
 
 // const navItems = {
 //   '/': {
@@ -21,12 +21,11 @@ import Image from 'next/image';
 // };
 
 export function Navbar() {
+  const set_auth_modal_state = useSetRecoilState(auth_modal_state);
 
-  const set_auth_modal_state = useSetRecoilState(auth_modal_state)
-
-  const handleClick = () => { 
-    set_auth_modal_state((prev) => ({...prev, isOpen: true}));
-  }
+  const handleClick = () => {
+    set_auth_modal_state((prev) => ({ ...prev, isOpen: true }));
+  };
   return (
     // <aside className="-ml-[8px] mb-16 tracking-tight">
     //   <div className="lg:sticky lg:top-20">
@@ -47,14 +46,17 @@ export function Navbar() {
     //   </div>
     // </aside>
 
-    <div className='flex items-center justify-between sm:px-12 px-2 md:px-24'>
-      <Link href={'/'} className='flex items-center justify-center h-20'>
-        <Image src={'/logo.png'} alt='NeetClone' height={35} width={35}/>
+    <div className="flex items-center justify-between sm:px-12 px-2 md:px-24">
+      <Link href={"/"} className="flex items-center justify-center h-20">
+        <Image src={"/logo.png"} alt="NeetClone" height={35} width={35} />
       </Link>
-      <div className='flex items-center'>
-        <button className='bg-brand-orange text-white px-2 py-1 sm:px-4 rounded-md text-sm font-medium
+      <div className="flex items-center">
+        <button
+          className="bg-brand-orange text-white px-2 py-1 sm:px-4 rounded-md text-sm font-medium
           hover:text-brand-orange hover:bg-white hover:border-2 hover:border-brand-orange border-2 
-          border-transparent transition duration-300 ease-in-out' onClick={handleClick}>
+          border-transparent transition duration-300 ease-in-out"
+          onClick={handleClick}
+        >
           Sign In
         </button>
       </div>

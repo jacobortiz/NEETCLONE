@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import { Navbar } from './components/navbar'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Navbar } from "./components/navbar";
 // import { Analytics } from '@vercel/analytics/react';
 // import { SpeedInsights } from '@vercel/speed-insights/next';
-import { PreloadResources } from '@/app/preload'
-import './globals.css'
+import { PreloadResources } from "@/app/preload";
+import "./globals.css";
 
-import { RecoilRoot } from 'recoil'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
+import { RecoilRoot } from "recoil";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 // fix this
 // export const metadata: Metadata = {
@@ -26,7 +26,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <RecoilRoot>
@@ -43,5 +43,5 @@ export default function RootLayout({
         </body>
       </html>
     </RecoilRoot>
-  )
+  );
 }
