@@ -1,11 +1,15 @@
-"use client";
+'use client'
 
-import { Topbar } from "@/app/components/topbar";
-import { ProblemsTable } from "@/app/components/problems_table";
-import React, { useState } from "react";
+import { Topbar } from '@/app/components/topbar'
+import { ProblemsTable } from '@/app/components/problems_table'
+import React, { useState } from 'react'
+import { useHasMounted } from '@/app/hooks/use_has_mounted'
 
 export default function Home() {
-  const [loadingProblems, setLoadingProblems] = useState(true);
+  const [loadingProblems, setLoadingProblems] = useState(true)
+
+  const hasMounted = useHasMounted()
+  if (!hasMounted) return null
 
   return (
     <>
@@ -50,7 +54,7 @@ export default function Home() {
         </div>
       </main>
     </>
-  );
+  )
 }
 
 const LoadingSkeleton = () => {
@@ -62,5 +66,5 @@ const LoadingSkeleton = () => {
       <div className='h-4 sm:w-52 w-32 rounded-full bg-dark-layer-1'></div>
       <span className='sr-only'>Loading...</span>
     </div>
-  );
-};
+  )
+}
