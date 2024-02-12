@@ -137,7 +137,9 @@ export function ProblemDescription({ problem }: { problem: Problem }) {
               .data()
               .dislikedProblems.filter((id: string) => id !== problem.id),
           })
-
+          transaction.update(problemRef, {
+            dislikes: problemDoc.data().dislikes - 1,
+          })
           setCurrentProblem((prev) =>
             prev ? { ...prev, dislikes: prev.dislikes - 1 } : null
           )
@@ -153,7 +155,6 @@ export function ProblemDescription({ problem }: { problem: Problem }) {
             dislikes: problemDoc.data().dislikes + 1,
             likes: problemDoc.data().likes - 1,
           })
-
           setCurrentProblem((prev) =>
             prev
               ? { ...prev, dislikes: prev.dislikes + 1, likes: prev.likes - 1 }
@@ -164,11 +165,9 @@ export function ProblemDescription({ problem }: { problem: Problem }) {
           transaction.update(userRef, {
             dislikedProblems: [...userDoc.data().dislikedProblems, problem.id],
           })
-
           transaction.update(problemRef, {
             dislikes: problemDoc.data().dislikes + 1,
           })
-
           setCurrentProblem((prev) =>
             prev ? { ...prev, dislikes: prev.dislikes + 1 } : null
           )
