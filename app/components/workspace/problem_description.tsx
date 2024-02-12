@@ -1,11 +1,15 @@
-import { AiFillDislike, AiFillLike } from 'react-icons/ai'
+import {
+  AiFillDislike,
+  AiFillLike,
+  AiOutlineLoading3Quarters,
+} from 'react-icons/ai'
 import { BsCheck2Circle } from 'react-icons/bs'
 import { TiStarOutline } from 'react-icons/ti'
 
 import { DBProblem, Problem } from '@/app/utils/problem'
 import { useEffect, useState } from 'react'
 import { auth, firestore } from '@/app/firebase/firebase'
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, getDoc, runTransaction } from 'firebase/firestore'
 import { RectangleSkeleton } from '@/app/components/skeletons/rectangle'
 import { CircleSkeleton } from '@/app/components/skeletons/circle'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -13,19 +17,87 @@ import { toast } from 'react-toastify'
 
 export function ProblemDescription({ problem }: { problem: Problem }) {
   const [user] = useAuthState(auth)
-  const { currentProblem, loading, problemDifficultyClass } =
+  const { currentProblem, loading, problemDifficultyClass, setCurrentProblem } =
     useGetCurrentProblem(problem?.id)
 
   const { liked, disliked, solved, setData, starred } = useGetUserDataOnProblem(
     problem?.id
   )
+  const [updating, setUpdating] = useState(false)
+
   const handleLike = async () => {
     if (!user) {
       toast.error('You must be logged in to like a problem', {
         position: 'top-left',
         theme: 'dark',
       })
+      return
     }
+    if (updating) return
+    setUpdating(true)
+    // handle like, dislike or neither
+    await runTransaction(firestore, async (transaction) => {
+      const userRef = doc(firestore, 'users', user?.uid)
+      const problemRef = doc(firestore, 'problems', problem.id)
+      const userDoc = await transaction.get(userRef)
+      const problemDoc = await transaction.get(problemRef)
+
+      if (userDoc.exists() && problemDoc.exists()) {
+        if (liked) {
+          // remove problem id from likedProblmes on user doc, decrement like count
+          transaction.update(userRef, {
+            likedProblems: userDoc
+              .data()
+              .likedProblems.filter((id: string) => id !== problem.id),
+          })
+
+          transaction.update(problemRef, { likes: problemDoc.data().likes - 1 })
+
+          setCurrentProblem((prev) =>
+            prev ? { ...prev, likes: prev.likes - 1 } : null
+          )
+
+          setData((prev) => ({ ...prev, liked: false }))
+        } else if (disliked) {
+          transaction.update(userRef, {
+            likedProblems: [...userDoc.data().likedProblems, problem.id],
+            dislikedProblems: userDoc
+              .data()
+              .dislikedProblems.filter((id: string) => id !== problem.id),
+          })
+
+          transaction.update(problemRef, {
+            likes: problemDoc.data().likes + 1,
+            dislikes: problemDoc.data().dislikes - 1,
+          })
+
+          setCurrentProblem((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  likes: prev.likes + 1,
+                  dislikes: prev?.dislikes - 1,
+                }
+              : null
+          )
+          setData((prev) => ({ ...prev, liked: true, disliked: false }))
+        } else {
+          transaction.update(userRef, {
+            likedProblems: [...userDoc.data().likedProblems, problem.id],
+          })
+
+          transaction.update(problemRef, {
+            likes: problemDoc.data().likes + 1,
+          })
+
+          setCurrentProblem((prev) =>
+            prev ? { ...prev, likes: prev.likes + 1 } : null
+          )
+          setData((prev) => ({ ...prev, liked: true }))
+        }
+      }
+    })
+    setUpdating(false)
   }
 
   return (
@@ -62,8 +134,14 @@ export function ProblemDescription({ problem }: { problem: Problem }) {
                   className='flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded p-[3px]  ml-4 text-lg transition-colors 
                   duration-200 text-dark-gray-6'
                   onClick={handleLike}>
-                  {liked && <AiFillLike className='text-dark-blue-s' />}
-                  {!liked && <AiFillLike />}
+                  {liked && !updating && (
+                    <AiFillLike className='text-dark-blue-s' />
+                  )}
+                  {!liked && !updating && <AiFillLike />}
+                  {updating && (
+                    <AiOutlineLoading3Quarters className='animate-spin' />
+                  )}
+
                   <span className='text-xs'>{currentProblem.likes}</span>
                 </div>
                 <div
