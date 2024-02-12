@@ -23,7 +23,13 @@ import { CircleSkeleton } from '@/app/components/skeletons/circle'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { toast } from 'react-toastify'
 
-export function ProblemDescription({ problem }: { problem: Problem }) {
+export function ProblemDescription({
+  problem,
+  _solved,
+}: {
+  problem: Problem
+  _solved: boolean
+}) {
   const [user] = useAuthState(auth)
   const { currentProblem, loading, problemDifficultyClass, setCurrentProblem } =
     useGetCurrentProblem(problem?.id)
@@ -233,7 +239,7 @@ export function ProblemDescription({ problem }: { problem: Problem }) {
                   {currentProblem.difficulty}
                 </div>
 
-                {solved && (
+                {(solved || _solved) && (
                   <div className='rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-green-s text-dark-green-s'>
                     <BsCheck2Circle />
                   </div>
