@@ -12,6 +12,13 @@ import { toast } from 'react-toastify'
 import { useParams, useRouter } from 'next/navigation'
 import { problems } from '@/app/utils/problems'
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
+import useLocalStorage from '@/app/hooks/useLocalStorage'
+
+export interface ISettings {
+  fontSize: string
+  settingsModalIsOpen: boolean
+  dropDownIsOpen: boolean
+}
 
 export function Playground({
   problem,
@@ -22,8 +29,15 @@ export function Playground({
   setSuccess: React.Dispatch<React.SetStateAction<boolean>>
   setSolved: React.Dispatch<React.SetStateAction<boolean>>
 }) {
+  const [fontSize, setFontSize] = useLocalStorage('ncc-font-size', '16px')
   const [activeTestCaseID, setActiveTestCaseID] = useState<number>(0)
   let [userCode, setUserCode] = useState<string>(problem?.starterCode)
+  const [settings, setSettings] = useState<ISettings>({
+    fontSize: fontSize,
+    settingsModalIsOpen: false,
+    dropDownIsOpen: false,
+  })
+
   const [user] = useAuthState(auth)
 
   const params = useParams()
@@ -100,7 +114,7 @@ export function Playground({
 
   return (
     <div className='flex flex-col bg-dark-layer-1 relative overflow-x-hidden'>
-      <PreferenceNav />
+      <PreferenceNav settings={settings} setSettings={setSettings} />
       <Split
         className='h-[calc(100vh-94px)]'
         direction='vertical'
@@ -112,7 +126,7 @@ export function Playground({
             value={userCode}
             theme={vscodeDark}
             extensions={[javascript()]}
-            style={{ fontSize: 16 }}
+            style={{ fontSize: settings.fontSize }}
             onChange={onChange}
           />
         </div>
