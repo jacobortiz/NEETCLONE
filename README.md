@@ -34,3 +34,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Check it
+
+[NeetClone](https://neetclone.vercel.app/)
+
+## Differences from freeCodeCamp
+
+[LeetCode Clone](https://www.youtube.com/watch?v=GnodscC2p-A&t=1882s)
+
+- using App Router in Next.js, not Pages Router
+- difference in file structure
